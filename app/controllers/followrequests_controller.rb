@@ -41,7 +41,7 @@ class FollowrequestsController < ApplicationController
 
     if the_followrequest.valid?
       the_followrequest.save
-      redirect_to("/followrequests/#{the_followrequest.id}", { :notice => "Followrequest updated successfully."} )
+      redirect_to("/followrequests/#{the_followrequest.id}", { :notice => "Followrequest updated successfully." })
     else
       redirect_to("/followrequests/#{the_followrequest.id}", { :alert => the_followrequest.errors.full_messages.to_sentence })
     end
@@ -53,6 +53,6 @@ class FollowrequestsController < ApplicationController
 
     the_followrequest.destroy
 
-    redirect_to("/followrequests", { :notice => "Followrequest deleted successfully."} )
+    redirect_to("/followrequests", { :notice => "Followrequest deleted successfully." })
   end
 end
