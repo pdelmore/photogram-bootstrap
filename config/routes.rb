@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   # Routes for the Like resource:
 
+  root 'user_authentication#index'
+
   # CREATE
   post("/insert_like", { :controller => "likes", :action => "create" })
           
