@@ -25,6 +25,8 @@ has_many  :photos, { :class_name => "Photo", :foreign_key => "owner_id", :depend
 
 has_many  :followrequests, { :class_name => "Followrequest", :foreign_key => "recipient_id", :dependent => :destroy }
 
+has_many  :sentfollowrequests, { :class_name => "Followrequest", :foreign_key => "sender_id", :dependent => :destroy }
+
 
 
 end

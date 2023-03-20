@@ -85,11 +85,18 @@
             <%= a_photo.likes_count %>
           </td>
 
+<% if @current_user != nil %>
           <td>
             <a href="/photos/<%= a_photo.id %>">
               Show details
             </a>
           </td>
+          <% else %>
+          <td>
+              Show details
+            </a>
+          </td>
+          <% end %>
         </tr>
       <% end %>
     </table>
