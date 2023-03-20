@@ -1,12 +1,11 @@
 <div>
   <div>
     <h1>
-      List of all users
+      List of users
     </h1>
   </div>
 </div>
 
-<hr>
 <div>
   <div>
     <table border="1">
@@ -16,11 +15,11 @@
         </th>
 
         <th>
-          Private
+          Private?
         </th>
 
         <th>
-          Follow
+        
         </th>
 
         <th>
@@ -43,9 +42,17 @@
               No
             </td>
           <% end %>
+
+          <% if @current_user != nil %>
           <td>
-            follow
+            <a href="# %>">
+              follow
+            </a>
           </td>
+          <% else %>
+          <td>
+          </td>
+          <% end %>
 
           <td>
             <a href="/users/<%= a_user.username %>">
