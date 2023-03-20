@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_17_220445) do
+ActiveRecord::Schema.define(version: 2023_03_20_173611) do
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2023_03_17_220445) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "followrequests", force: :cascade do |t|
+  create_table "follow_requests", force: :cascade do |t|
     t.integer "recipient_id"
     t.integer "sender_id"
     t.string "status"

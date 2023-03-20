@@ -9,6 +9,7 @@
 #  photo_id   :integer
 #
 class Like < ApplicationRecord
+  validates(:fan_id, { :uniqueness => true })
 
   belongs_to :fan, { :required => true, :class_name => "User", :foreign_key => "fan_id" }
 

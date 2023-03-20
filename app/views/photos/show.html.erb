@@ -53,8 +53,8 @@
         </dt>
         <dd>
 
-          <% @the_photo.comments.each do |comment| %>
-            <%= comment.author.username %>
+          <% @the_photo.likes.each do |like_user| %>
+            <%= like_user.fan.username %>
 
           <% end %>
         </dd>
@@ -99,9 +99,20 @@
           Add a fan
         </dt>
         <dd>
-          add_fan
-        </dd>
 
+<% like_check = @the_photo.likes.where({ :fan_id => @current_user.id }).first %>
+
+          <% if like_check != nil %>
+            <a href="/delete_like/<%= like_check.id %>">
+              Delete like
+            </a>
+          <% else %>
+            <form action="/insert_like" method="post">
+              <input type="hidden" id="photo_id_box" name="query_photo_id" value="<%= @the_photo.id %>">
+              <button>Like</button>
+            </form>
+          <% end %>
+        </dd>
       <% end %>
 
     </div>
@@ -156,11 +167,11 @@
 
         <input type="hidden" id="photo_id_box" name="query_photo_id" value="<%= @the_photo.id %>">
 
-      <button>
-        Add comment
-      </button>
-    </form>
+        <button>
+          Add comment
+        </button>
+      </form>
 
-  </div>
+    </div>
 
-  <hr>
+    <hr>

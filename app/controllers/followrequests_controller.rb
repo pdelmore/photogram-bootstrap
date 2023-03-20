@@ -1,4 +1,4 @@
-class FollowrequestsController < ApplicationController
+class FollowRequestsController < ApplicationController
   def index
     matching_followrequests = Followrequest.all
 
