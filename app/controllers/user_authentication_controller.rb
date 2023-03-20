@@ -95,6 +95,8 @@ class UserAuthenticationController < ApplicationController
   end
 
   def show
+if @current_user != nil
+
     the_id = params.fetch("path_id")
 
     matching_users = User.where({ :username => the_id })
@@ -102,5 +104,9 @@ class UserAuthenticationController < ApplicationController
     @the_user = matching_users.at(0)
 
     render({ :template => "user_authentication/show.html.erb" })
+
+else
+  redirect_to("/user_sign_in", { :notice => "You have to sign in first." })
   end
+end
 end

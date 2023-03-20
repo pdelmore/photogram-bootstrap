@@ -1,6 +1,6 @@
 class FollowRequestsController < ApplicationController
   def index
-    matching_followrequests = Followrequest.all
+    matching_followrequests = FollowRequest.all
 
     @list_of_followrequests = matching_followrequests.order({ :created_at => :desc })
 
@@ -10,7 +10,7 @@ class FollowRequestsController < ApplicationController
   def show
     the_id = params.fetch("path_id")
 
-    matching_followrequests = Followrequest.where({ :id => the_id })
+    matching_followrequests = FollowRequest.where({ :id => the_id })
 
     @the_followrequest = matching_followrequests.at(0)
 
@@ -18,22 +18,28 @@ class FollowRequestsController < ApplicationController
   end
 
   def create
-    the_followrequest = Followrequest.new
+    the_followrequest = FollowRequest.new
     the_followrequest.recipient_id = params.fetch("query_recipient_id")
-    the_followrequest.sender_id = params.fetch("query_sender_id")
-    the_followrequest.status = params.fetch("query_status")
+    the_followrequest.sender_id = @current_user.id
+
+    recipient = User.where({ :id => the_followrequest.recipient_id }).first
+    if recipient.private == true
+      the_followrequest.status = "private"
+    else
+      the_followrequest.status = "accepted"
+    end
 
     if the_followrequest.valid?
       the_followrequest.save
-      redirect_to("/followrequests", { :notice => "Followrequest created successfully." })
+      redirect_to("/users", { :notice => "Followrequest created successfully." })
     else
-      redirect_to("/followrequests", { :alert => the_followrequest.errors.full_messages.to_sentence })
+      redirect_to("/users", { :alert => the_followrequest.errors.full_messages.to_sentence })
     end
   end
 
   def update
     the_id = params.fetch("path_id")
-    the_followrequest = Followrequest.where({ :id => the_id }).at(0)
+    the_followrequest = FollowRequest.where({ :id => the_id }).at(0)
 
     the_followrequest.recipient_id = params.fetch("query_recipient_id")
     the_followrequest.sender_id = params.fetch("query_sender_id")
@@ -49,7 +55,7 @@ class FollowRequestsController < ApplicationController
 
   def destroy
     the_id = params.fetch("path_id")
-    the_followrequest = Followrequest.where({ :id => the_id }).at(0)
+    the_followrequest = FollowRequest.where({ :id => the_id }).at(0)
 
     the_followrequest.destroy
 

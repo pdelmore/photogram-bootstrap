@@ -18,6 +18,24 @@
       <dd>
         <%= @the_user.followrequests.count %>
       </dd>
+      <% if @the_user.id != @current_user.id || @current_user.id != @the_user.sentfollowrequests.sender_id = nil %>
+        <dd>
+
+          <form action="/insert_follow_request" method="post">
+            <input type="hidden" name="query_recipient_id" value="<%= @the_user.id %>">
+
+            <button>
+              Follow
+            </button>
+          </form>
+
+        <% else %>
+
+          <a href="/delete_follow_request/<%= @the_user.sentfollowrequests.id%>">
+            Unfollow
+          </a>
+        </dd>
+      <% end %>
 
       <dt>
         Following
@@ -27,30 +45,24 @@
       </dd>
     </div>
 
-<nav>
-  <ul>
-    <li>
-      <a href="/users/<%= @the_user.username %>">Profile</a>
-    </li>
-    <li>
-      <a href="/users/<%= @the_user.username %>/liked_photos">Liked photos</a>
-    </li>
-    <li>
-      <a href="/users/<%= @the_user.username %>/feed">Feed</a>
-    </li>
-    <li>
-      <a href="/users/<%= @the_user.username %>/discover">Discover</a>
-    </li>
-  </ul>
-</nav>
-
+    <nav>
+      <ul>
+        <li>
+          <a href="/users/<%= @the_user.username %>">Profile</a>
+        </li>
+        <li>
+          <a href="/users/<%= @the_user.username %>/liked_photos">Liked photos</a>
+        </li>
+        <li>
+          <a href="/users/<%= @the_user.username %>/feed">Feed</a>
+        </li>
+        <li>
+          <a href="/users/<%= @the_user.username %>/discover">Discover</a>
+        </li>
+      </ul>
+    </nav>
 
   </div>
-
-
-
-
-
 
   <hr>
 
@@ -107,11 +119,11 @@
               <%= photo.likes_count %>
             </td>
 
-                      <td>
-            <a href="/photos/<%= photo.id %>">
-              Show details
-            </a>
-          </td>
+            <td>
+              <a href="/photos/<%= photo.id %>">
+                Show details
+              </a>
+            </td>
           </tr>
         <% end %>
       </table>
