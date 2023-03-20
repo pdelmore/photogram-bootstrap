@@ -9,15 +9,15 @@
 <div>
   <div>
 
-    <form action="/insert_photo" method="post">
+    <form action="/insert_photo" method="post" enctype="multipart/form-data">
 
       <div>
-        <label for="image_box">
+        <label for="image">
           Image
         </label>
 
-        <input type="text" id="image_box" name="query_image">
-        <input id="image_box" type="file" name="query_image" placeholder="Enter a URL for the image...">
+        <input type="text" id="image" name="image">
+        <input id="image" type="file" name="image" placeholder="Enter a URL for the image...">
 
         <label for="caption_box">
           Caption
@@ -67,7 +67,7 @@
         <tr>
 
           <td>
-            <img src="<%= a_photo.image %>">
+            <img src="<%= a_photo.image %>" class="img-responsive">
           </td>
 
           <td>
