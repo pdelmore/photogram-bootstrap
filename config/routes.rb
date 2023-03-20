@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root 'user_authentication#index'
 
+  get("/users/:path_id", { :controller => "user_authentication", :action => "show" })
+
   # CREATE
   post("/insert_like", { :controller => "likes", :action => "create" })
           
